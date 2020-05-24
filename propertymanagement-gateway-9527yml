@@ -1,0 +1,131 @@
+spring:
+  profiles:
+    active:
+    - dev
+---
+
+server:
+  port: 9527
+
+spring:
+  profiles: dev  #开发环境
+  application:
+    name: microservicecloud-zuul-gateway
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 30000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+#      ,http://eureka-7002:7002/eureka,http://eureka-7003:7003/eureka
+  instance:
+    instance-id: gateway-9527.com
+
+info:
+  app.name: atguigu-microcloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+
+
+
+
+zuul:
+  SendErrorFilter:
+    error:
+      disable: true
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+  prefix: /zifeng
+  ignored-services: "*"
+  routes:
+    landcloud.serviceId: propertymanagement-landcloud-consumer
+    landcloud.path: /land/**
+    paycloud.serviceId: propertymanagement-paycloud-consumer
+    paycloud.path: /pay/**
+    repaircloud.serviceId: propertymanagement-repaircloud-consumer
+    repaircloud.path: /repair/**
+    materialcloud.serviceId: propertymanagement-materialcloud-consumer
+    materialcloud.path: /material/**
+    messagecloud.serviceId: propertymanagement-messagecloud-consumer
+    messagecloud.path: /message/**
+    complaintcloud.serviceId: propertymanagement-complaintcloud-consumer
+    complaintcloud.path: /complaint/**
+#    frontcloud.serviceId: propertymanagement-frontcloud
+#    frontcloud.path: /front/**
+
+
+
+
+--- 
+server:
+  port: 9527
+
+spring:
+  profiles: test  #部署
+  application:
+    name: microservicecloud-zuul-gateway
+  redis:
+    host: 172.18.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 30000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.18.0.3:7001/eureka
+#      ,http://eureka-7002:7002/eureka,http://eureka-7003:7003/eureka
+  instance:
+    instance-id: gateway-9527.com
+    prefer-ip-address: true
+
+
+info:
+  app.name: atguigu-microcloud
+  company.name: www.atguigu.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+
+
+
+
+zuul:
+  SendErrorFilter:
+    error:
+      disable: true
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,Token,APPToken
+  prefix: /zifeng
+  ignored-services: "*"
+  routes:
+    landcloud.serviceId: propertymanagement-landcloud-consumer
+    landcloud.path: /land/**
+    paycloud.serviceId: propertymanagement-paycloud-consumer
+    paycloud.path: /pay/**
+    repaircloud.serviceId: propertymanagement-repaircloud-consumer
+    repaircloud.path: /repair/**
+    materialcloud.serviceId: propertymanagement-materialcloud-consumer
+    materialcloud.path: /material/**
+    messagecloud.serviceId: propertymanagement-messagecloud-consumer
+    messagecloud.path: /message/**
+    complaintcloud.serviceId: propertymanagement-complaintcloud-consumer
+    complaintcloud.path: /complaint/**
+#    frontcloud.serviceId: propertymanagement-frontcloud
+#    frontcloud.path: /front/**
