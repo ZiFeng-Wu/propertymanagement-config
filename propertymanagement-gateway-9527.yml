@@ -89,7 +89,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://172.18.0.3:7001/eureka
+      defaultZone: http://115.159.186.219:7001/eureka
 #      ,http://eureka-7002:7002/eureka,http://eureka-7003:7003/eureka
   instance:
     instance-id: gateway-9527.com
