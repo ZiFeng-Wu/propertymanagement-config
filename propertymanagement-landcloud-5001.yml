@@ -62,7 +62,7 @@ feign:
 eureka:
   client:
     service-url:
-      defaultZone: http://172.18.0.3:7001/eureka/
+      defaultZone: http://115.159.186.219:7001/eureka/
 #      ,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
   instance:
     instance-id: microservicecloud-landcloud5001
